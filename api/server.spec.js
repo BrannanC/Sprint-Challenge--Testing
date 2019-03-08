@@ -26,5 +26,25 @@ describe('server.js', () => {
         expect(res.type).toBe('application/json');
         });
     });
+
+    describe('POST /games', () => {
+        it('should return 201 status code', async () => {
+            const game = ({ title: 'Portal II', genre: 'Puzzle' });
+            const res = await request(server).post('/games').send(game);
+            expect(res.status).toEqual(201);
+        });
+
+        it('should return JSON', async () => {
+            const game = ({ title: 'Portal II', genre: 'Puzzle' });
+            const res = await request(server).post('/games').send(game);
+            expect(res.type).toBe('application/json');
+        });
+
+        it('should return inserted game', async () => {
+            const game = ({ title: 'Portal II', genre: 'Puzzle' });
+            const res = await request(server).post('/games').send(game);
+            expect(res.body).toEqual({ title: 'Portal II', genre: 'Puzzle', id: 1 });
+        });
+    });
 });
 
