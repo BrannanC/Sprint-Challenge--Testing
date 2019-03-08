@@ -45,6 +45,12 @@ describe('server.js', () => {
             const res = await request(server).post('/games').send(game);
             expect(res.body).toEqual({ title: 'Portal II', genre: 'Puzzle', id: 1 });
         });
+
+        it('should return status code 422 with no title', async () => {
+            const game = ({ genre: 'Puzzle' });
+            const res = await request(server).post('/games').send(game);
+            expect(res.status).toEqual(422);
+        });
     });
 });
 
