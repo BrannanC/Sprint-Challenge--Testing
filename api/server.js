@@ -21,7 +21,9 @@ server.post('/games', (req, res) => {
                 res.status(201).json({ game })
             })
             .catch(err => {
-                res.status(500).json({ error: 'Could not add game' })
+                err.errno === 19 ?
+                res.status(405).json({ error: 'Duplicate game'})
+                : res.status(500).json({ error: 'Could not add game', err })
             })
     }
 });
