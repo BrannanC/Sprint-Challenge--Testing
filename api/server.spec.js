@@ -41,9 +41,9 @@ describe('server.js', () => {
         });
 
         it('should return inserted game', async () => {
-            const game = ({ title: 'Portal II', genre: 'Puzzle' });
+            const game = ({ title: 'Portal II', genre: 'Puzzle', releaseYear: 2011 });
             const res = await request(server).post('/games').send(game);
-            expect(res.body).toEqual({ title: 'Portal II', genre: 'Puzzle', id: 1 });
+            expect(res.body.game).toEqual({ title: 'Portal II', genre: 'Puzzle', id: 1, releaseYear: 2011 });
         });
 
         it('should return status code 422 with no title', async () => {
