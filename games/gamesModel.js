@@ -9,7 +9,8 @@ module.exports = {
   };
 
   async function insert(game) {
-    return null;
+    const [id] = await db('games').insert(game);
+    return db('games').where({id}).first();
   }
   
   async function update(id, changes) {
@@ -21,7 +22,7 @@ module.exports = {
   }
   
   function getAll() {
-    return null;
+    return db('games');
   }
   
   function findById(id) {

@@ -12,8 +12,18 @@ describe('gamesModel.js', () => {
         it('should insert a game', async () => {
             const game = await Games.insert({ title: 'Portal II', genre: 'Puzzle' });
             expect(game.title).toBe('Portal II');
-            expect(game.Genre).toBe('Puzzle');
+            expect(game.genre).toBe('Puzzle');
             expect(game.id).toBe(1);
+        });
+     });
+
+     describe('getAll', () => {
+        it('return all games', async () => {
+            let games = await Games.getAll();
+            expect(games.length).toBe(0);
+            await Games.insert({ title: 'Portal II', genre: 'Puzzle' });
+            games = await Games.getAll();
+            expect(games.length).toBe(1);
         });
      });
 });
