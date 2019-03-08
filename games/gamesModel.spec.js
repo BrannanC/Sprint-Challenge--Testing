@@ -36,4 +36,14 @@ describe('gamesModel.js', () => {
             expect(games.length).toBe(0);
         });
      });
+
+     describe('findById', () => {
+        it('should return a single game object', async () => {
+            await Games.insert({ title: 'Portal II', genre: 'Puzzle' });
+            const game = await Games.findById(1);
+            expect(game.title).toBe('Portal II');
+            expect(game.genre).toBe('Puzzle');
+            expect(game.id).toBe(1);
+        });
+     });
 });
