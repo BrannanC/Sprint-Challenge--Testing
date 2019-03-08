@@ -26,4 +26,14 @@ describe('gamesModel.js', () => {
             expect(games.length).toBe(1);
         });
      });
+
+     describe('delete', () => {
+        it('should remove a game', async () => {
+            const game = await Games.insert({ title: 'Portal II', genre: 'Puzzle' });
+            expect(game.title).toBe('Portal II');
+            await Games.remove(1);
+            const games = await Games.getAll();
+            expect(games.length).toBe(0);
+        });
+     });
 });
