@@ -33,10 +33,12 @@ describe('server.js', () => {
         expect(res.status).toEqual(404);
         });
 
-        it('should return a single game object', async () => {
+        it('should return a single game json object', async () => {
             const game = ({ title: 'Portal II', genre: 'Puzzle' });
             await request(server).post('/games').send(game);
             const res = await request(server).get('/games/1');
+            expect(res.status).toEqual(200);
+            expect(res.type).toBe('application/json');
             expect(res.body.game.title).toBe('Portal II');
             expect(res.body.game.genre).toBe('Puzzle');
             expect(res.body.game.id).toBe(1);

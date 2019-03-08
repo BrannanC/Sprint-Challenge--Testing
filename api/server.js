@@ -39,5 +39,17 @@ server.delete('/games/:id', async (req, res) => {
             res.status(500).json({ error: 'Could not remove game' })
         });
 });
+
+server.get('/games/:id', async (req, res) => {
+    Games.findById(req.params.id)
+        .then(game => {
+            game ?
+            res.status(200).json({ game })
+            : res.status(404).json({ error: 'Cannot find game with that id' })
+        })
+        .catch(err => {
+            res.status(500).json({ error: 'Could not find game' })
+        });
+});
   
 module.exports = server;
