@@ -59,5 +59,18 @@ describe('server.js', () => {
             expect(res.status).toEqual(405);
         });
     });
+
+    describe('DELETE /games', () => {
+        it('should delete a game', async () => {
+            const res = await request(server).delete('/games/1');
+            expect(res.status).toEqual(404);
+
+            const game = ({ title: 'Portal II', genre: 'Puzzle', releaseYear: 2011 });
+            await request(server).post('/games').send(game);
+
+            const res2 = await request(server).delete('/games/1');
+            expect(res2.status).toEqual(204);
+        });
+    });
 });
 

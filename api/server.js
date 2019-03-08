@@ -27,5 +27,17 @@ server.post('/games', (req, res) => {
             })
     }
 });
+
+server.delete('/games/:id', async (req, res) => {
+    Games.remove(req.params.id)
+        .then(isDel => {
+            isDel ?
+            res.status(204).end()
+            : res.status(404).json({ error: 'Game with that ID does not exist' })
+        })
+        .catch(err => {
+            res.status(500).json({ error: 'Could not remove game' })
+        });
+});
   
 module.exports = server;
