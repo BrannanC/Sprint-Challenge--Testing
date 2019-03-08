@@ -51,6 +51,13 @@ describe('server.js', () => {
             const res = await request(server).post('/games').send(game);
             expect(res.status).toEqual(422);
         });
+
+        it('should return status code 405 with duplicate game', async () => {
+            const game = ({ title: 'Portal II', genre: 'Puzzle', releaseYear: 2011 });
+            await request(server).post('/games').send(game);
+            const res = await request(server).post('/games').send(game);
+            expect(res.status).toEqual(405);
+        });
     });
 });
 
